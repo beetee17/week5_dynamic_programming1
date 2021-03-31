@@ -29,7 +29,13 @@ def get_change(m):
     # an additionnal row for 0 coins is used to allow for comparison with a base denomination
     # for the first coin
 
-    table = [[0]* (m+1)] * len(coins)
+    # This doesn't do what you hoped.
+    # table = [[0]* (m+1)] * len(coins)
+    # It reuses list objects multiple times. As you can see when you made a change to one cell, 
+    # which was in a reused list object.
+    table = [ [0 for j in range(m+1)] for i in range(len(coins))]
+
+    
     for j in range(1, m+1): 
         # skips 0 money as that can be 'formed' with no coins
         # any amounts > 0 cannot be formed with a 0 coin --> 10e9 is a placeholder for infinity
@@ -64,3 +70,4 @@ if __name__ == '__main__':
     m = int(sys.stdin.read())
 
     print(get_change(m))
+    
