@@ -16,20 +16,28 @@ def edit_distance(s, t):
     Output Format
     Output the edit distance between the given two strings."""
 
-    T = [[0 for j in range(len(s))] if i == 0 else [0 if j == 0 else None for j in range(len(s))] for i in range(len(t))]
+    # init table of min edit distance between s and t
+    # first row and first col corresponds to base case (edit distance btw null string and other string)
+    # therefore, edit distance corresponds to length of non-null (sub) string 
 
-    for j in range(1, len(s)):
-        for i in range(1, len(t)):
-            if t[j-1] == s[i-1]:
-                T[i][j] = T[i-1][j-1]
+    T = [[j for j in range(len(s) + 1)] if i == 0 else [i if j == 0 else None for j in range(len(s) +1)] for i in range(len(t) + 1)]
+    
+    # iteratively populate table by finding minimum of each possible action taken (in, del, match/mismatch) 
+    for j in range(1, len(s) + 1):
+        for i in range(1, len(t) + 1):
+            if s[j-1] == t[i-1]:
+                # match will not incur any penalty to edit distance
+                # therefore, T[i-1][j-1] and not T[i-1][j-1] + 1
+                T[i][j] = min(T[i-1][j-1], T[i-1][j] + 1, T[i][j-1] + 1)
+
             else:
+                # mismatch will incur +1 penalty to edit distance
                 T[i][j] = min(T[i-1][j], T[i][j-1], T[i-1][j-1]) + 1
 
-    # backtrack, and implement such that mismatch is +1 to edit distance
-    print(T)
+    # return min edit distance between the 2 full strings
     return T[-1][-1]
 
 
 if __name__ == "__main__":
-    # print(edit_distance(input(), input()))
-    print(edit_distance('editing', 'distance'))
+    print(edit_distance(input(), input()))
+    # print(edit_distance('editing', 'distance'))
