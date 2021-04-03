@@ -60,7 +60,7 @@ def get_change(m):
             else:
                 # the amount is less than the current coin
                 # impossible to use any more of the current coin
-                table[i][amt] =table[i-1][amt]
+                table[i][amt] = table[i-1][amt]
 
 
     # return the last value of the entire table which corresponds to the min no. of coins to form m
