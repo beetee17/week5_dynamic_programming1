@@ -25,7 +25,8 @@ def lcs2(a, b):
     Output Format 
     Output 𝑝."""
 
-
+    # BASE CASE: when i = 0 --> update table with lcs of a[:j] and null string
+    # Vice versa when j = 0
     T = [[0 for j in range(len(a) + 1)] for i in range(len(b) + 1)] 
     
     # iteratively populate table by finding max at each square
