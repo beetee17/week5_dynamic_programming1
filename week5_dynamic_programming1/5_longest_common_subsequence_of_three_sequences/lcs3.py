@@ -6,15 +6,39 @@ import sys
 
 
 def lcs3(a, b, c):
-    """"""
+    """Compute the length of a longest common subsequence of three sequences.
 
+    Task. Given three sequences 𝐴 = (𝑎1,𝑎2,...,𝑎𝑛), 𝐵 = (𝑏1,𝑏2,...,𝑏𝑚), and 
+    𝐶 = (𝑐1,𝑐2,...,𝑐𝑙), find the length of their longest common subsequence, 
+    i.e., the largest non-negative integer 𝑝 such that there existindices 
+    1 ≤ 𝑖1 < 𝑖2 < ··· < 𝑖𝑝 ≤ 𝑛, 1 ≤ 𝑗1 < 𝑗2 < ··· < 𝑗𝑝 ≤ 𝑚, 1 ≤ 𝑘1 < 𝑘2 < ··· < 𝑘𝑝 ≤ 𝑙 
+    such that 𝑎𝑖1 = 𝑏𝑗1 = 𝑐𝑘1, ... , 𝑎𝑖𝑝 = 𝑏𝑗𝑝 = 𝑐𝑘𝑝
 
+    Input Format
+    First line: 𝑛
+    Second line: 𝑎1, 𝑎2, ... , 𝑎𝑛 
+    Third line: 𝑚
+    Fourth line: 
+    𝑏1, 𝑏2, ... , 𝑏𝑚
+    Fifth line: 𝑙 
+    Sixth line: 𝑐1, 𝑐2, ... , 𝑐𝑙
+
+    Constraints
+    1 ≤ 𝑛, 𝑚, 𝑙 ≤ 100
+    −10 < 𝑎𝑖, 𝑏𝑖, 𝑐𝑖 < 10 
     
+    Output Format
+    Output 𝑝."""
+
     # Approach to problem: find all lcs of a and b 
     # s1, s2... = lcs(a, b), lcs(a, b, c) = max_len(lcs(s1, c), lcs(s2, c),....)
     # does not work as too time consuming
     # instead, simply extend 2D lcs table to 3D matrix
-
+        
+    # Base cases (i.e lcs when one of the sequences is null)
+    # Why is base case for k = 0 not lcs2 of i and j?
+    # Because longest common subsequence of ALL 3 sequences
+    # No way to have a lcs when any of the sequences is null!
     T = [[[0 for k in range(len(c) + 1)] for j in range(len(b) + 1)] for i in range(len(a) + 1)]
 
     # iteratively populate matrix by finding max at each square
